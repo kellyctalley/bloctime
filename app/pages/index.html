@@ -10,8 +10,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
 </head>
 <body>
-    <h1>What time is it?</h1>
-    <h2>It's BlocTime</h2>
+    <div ng-controller="countdownTimer">
+        <h1>{{counter | timecode}}</h1>
+        <button ng-click="startTimer()">Start</button>
+        <button ng-click="stopTimer()">Stop</button>
+    </div>
+
+    <!--<div ng-controller="counterCtrl">
+<p>{{counter | timecode}}</p>
+    <button ng-click="stop()">Stop</button>
+    <button ng-click="countdown()">Start</button>     
+</div>-->
     <script src="/js/app.js"></script>
 </body>
 </html>
