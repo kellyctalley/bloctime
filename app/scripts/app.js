@@ -5,28 +5,75 @@ blocTime = angular.module('BlocTime', ['ui.router', 'firebase']);
   //break timer starts at 5 minutes
   //filter into timecode format
 
-blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $interval) {
+  //create variables for full time, short break time and long break time
+  //can these be done as variables and then inserted into $scope.counter?
+  //and then keep track of how many sessions have gone by?
+  //possibly add some kind of indicator?
 
-  $scope.counter = 1500;
-  var stop;
-  var isTimerRunning = false;
+var workTimer = 1500;
+var shortBreak = 300;
+var longBreak = 1800;
+
+blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $interval) {
+  $scope.isTimerRunning = false;
+  $scope.breakTime = false;
+  var pomodoros = 0;
+  var pomodorGo;
+
 
   $scope.startTimer = function() {
-    this.isTimerRunning = true;
-    stop = $interval(function() {
+    $scope.isTimerRunning = true;
+
+    if (!$scope.counter) {
+      $scope.counter = workTimer;
+    }
+
+    pomodorGo = $interval(function() {
       $scope.counter--;
       if ($scope.counter == 0) {
-        $interval.cancel(stop);
+        $interval.cancel(pomodorGo);
+        $scope.isTimerRunning = false;
+
+        if (!$scope.breakTime) {
+          pomodoros++;
+          console.log(pomodoros);
+          $scope.breakTime = true;
+
+          if (pomodoros % 4 === 0) {
+            $scope.counter = longBreak;
+            $scope.isTimerRunning = false;
+          } else {
+            $scope.counter = shortBreak;
+            $scope.isTimerRunning = false;
+          }
+        } else {
+          console.log("back to work");
+          $scope.breakTime = false;
+          $scope.counter = workTimer;
+        }
+
+      }
+
+
+    }, 1000);
+
+
+
+    /*this.isTimerRunning = true;
+    pomodorGo = $interval(function() {
+      $scope.counter--;
+      if ($scope.counter == 0) {
+        $interval.cancel(pomodorGo);
         $scope.counter = 1500;
       }
-    }, 1000);
+    }, 1000);*/
 
   };
 
-  $scope.stopTimer = function() {
-    $interval.cancel(stop);
-    $scope.counter = 1500;
-    this.isTimerRunning = false;
+  $scope.resetTimer = function() {
+    $interval.cancel(pomodorGo);
+    $scope.counter = workTimer;
+    $scope.isTimerRunning = false;
   }
 
 }]);
