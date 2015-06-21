@@ -10,9 +10,13 @@ blocTime = angular.module('BlocTime', ['ui.router', 'firebase']);
   //and then keep track of how many sessions have gone by?
   //possibly add some kind of indicator?
 
-var workTimer = 1500;
-var shortBreak = 300;
-var longBreak = 1800;
+var workTimer = 10; //1500
+var shortBreak = 3; //300
+var longBreak = 5; //1800
+
+var timerDing = new buzz.sound( "https://dl.dropboxusercontent.com/u/101665267/elevator-ding.mp3", {
+  preload: true
+});
 
 blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $interval) {
   $scope.isTimerRunning = false;
@@ -32,6 +36,7 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $
       $scope.counter--;
       if ($scope.counter == 0) {
         $interval.cancel(pomodorGo);
+        timerDing.play();
         $scope.isTimerRunning = false;
 
         if (!$scope.breakTime) {
@@ -54,7 +59,6 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $
 
       }
 
-
     }, 1000);
 
 
@@ -75,6 +79,8 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $
     $scope.counter = workTimer;
     $scope.isTimerRunning = false;
   }
+
+  $scope.$watch
 
 }]);
 
