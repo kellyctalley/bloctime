@@ -34,6 +34,7 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $
 
     pomodorGo = $interval(function() {
       $scope.counter--;
+      console.log("interval");
       if ($scope.counter == 0) {
         $interval.cancel(pomodorGo);
         timerDing.play();
@@ -78,9 +79,15 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $
     $interval.cancel(pomodorGo);
     $scope.counter = workTimer;
     $scope.isTimerRunning = false;
-  }
+  };
 
-  $scope.$watch
+  /*$scope.$watch('counter', function() {
+    console.log("watch");
+    if ($scope.counter===0) {
+      //timerDing.play();
+      console.log("ding");
+    }
+  });*/
 
 }]);
 
