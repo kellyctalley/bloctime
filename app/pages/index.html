@@ -5,12 +5,15 @@
     <title>Bloc Time</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.1/build/cssreset/cssreset-min.css">
     <link href='http://fonts.googleapis.com/css?family=Exo+2:400,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid" ng-controller="countdownTimer">
+        <div class="row">
         <!--<img src="/templates/test.jpg">-->
-        <div ng-controller="countdownTimer" class="timer">
+        <div class="timer col-md-9">
             <h1 ng-bind="counter | timecode"></h1>
             <div ng-show="!isTimerRunning && !breakTime">
                 <button ng-click="startTimer()">Start</button>
@@ -22,6 +25,21 @@
             <div ng-show="breakTime && !isTimerRunning">
                 <button ng-click="startTimer()">Break</button>
             </div>
+        </div>
+        <div class="task-list col-md-3">
+            <h2>Completed Tasks</h2>
+            <input type="text" ng-model="task">
+            <button ng-click="addTask()">Add Task</button>
+            <div class="tasks">
+                <ul>
+                    <li ng-repeat="task in tasks">
+                        {{task.task}}<br>
+                        {{task.completed | date:'medium'}}
+                    </li>
+                </ul>
+            </div>
+            <button ng-click="clearData()">Clear List</button>
+        </div>
         </div>
     </div>
 

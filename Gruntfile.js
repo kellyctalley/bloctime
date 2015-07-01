@@ -41,6 +41,9 @@ module.exports = function(grunt) {
                     './app/sass/**/*.scss',
                     './app/pages/**/*.html',
                     './app/templates/**/*.html',
+                    './app/assets/**/*.png',
+                    './app/assets/**/*.jpg',
+                    './app/assets/**/*.mp3',
                     'Gruntfile.js'
                 ],
                 tasks: [
@@ -60,8 +63,8 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    src: [ './**/*.png', './**/*.jpg' ],
-                    dest: './dist/images',
+                    src: [ './**/*.png', './**/*.jpg', './**/*.mp3' ],
+                    dest: './dist/assets',
                     cwd: './app/assets/'
                 }, {
                     expand: true,

@@ -18,6 +18,11 @@ var Hapi = require('hapi'),
             path: '/images/{path*}',
             handler: createDirectoryRoute('images')
         },
+        assets: {
+            method: 'GET',
+            path: '/assets/{path*}',
+            handler: createDirectoryRoute('assets')
+        },
         templates: {
             method: 'GET',
             path: '/templates/{path*}',

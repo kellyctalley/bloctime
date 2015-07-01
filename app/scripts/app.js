@@ -18,12 +18,24 @@ var timerDing = new buzz.sound( "https://dl.dropboxusercontent.com/u/101665267/e
   preload: true
 });
 
-blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $interval) {
+blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function($scope, $interval, Tasks) {
   $scope.isTimerRunning = false;
   $scope.breakTime = false;
   var pomodoros = 0;
   var pomodorGo;
 
+  // might need to tweak this
+  $scope.tasks = Tasks.all;
+
+  $scope.addTask = function () {
+    Tasks.all.$add({
+      task: $scope.task,
+      completed: Date.now()
+    });
+
+    $scope.task = null;
+
+  };
 
   $scope.startTimer = function() {
     $scope.isTimerRunning = true;
@@ -91,13 +103,6 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', function($scope, $
 
 }]);
 
-
-//create button with ngClick directive to start or reset timer
-  //when button is clicked, timer should countdown every second
-
-//timer cannot pause, only reset
-
-
 blocTime.filter('timecode', function(){
   return function(seconds) {
     seconds = Number.parseFloat(seconds);
@@ -125,4 +130,21 @@ blocTime.filter('timecode', function(){
 
     return output;
   }
-})
+});
+
+blocTime.factory('Tasks', ['$firebaseArray', function($firebaseArray) {
+  var ref = new Firebase("https://radiant-heat-6289.firebaseio.com");
+
+  // create an AngularFire reference to the data
+  var tasks = $firebaseArray(ref);
+
+  return {
+    all: tasks
+    // remaining logic for tasks
+  }
+
+  $scope.clearData = function() {
+    ref.remove();
+  };
+
+}]);

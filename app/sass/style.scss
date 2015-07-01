@@ -22,3 +22,16 @@
     outline: 0;
   }
 }
+
+.task-list {
+  height: 1000px;
+  background-color: #ddd;
+
+  li {
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+    border: 1px #000 solid;
+  }
+}
+
