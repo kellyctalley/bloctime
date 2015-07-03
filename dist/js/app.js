@@ -110,7 +110,7 @@ blocTime.filter('timecode', function(){
 
     //retuned when no time is provided.
     if (Number.isNaN(seconds)){
-      return '--:--';
+      return '00:00';
     }
 
     //make it a whole number

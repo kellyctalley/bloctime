@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Bloc Time</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.1/build/cssreset/cssreset-min.css">
-    <link href='http://fonts.googleapis.com/css?family=Exo+2:400,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Biryani:300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Exo:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -14,7 +15,9 @@
         <div class="row">
         <!--<img src="/templates/test.jpg">-->
         <div class="timer col-md-9">
-            <h1 ng-bind="counter | timecode"></h1>
+            <h1 id="timer-title">bloc pomodoro timer</h1>
+            <div class="timer-circle">
+                <h1 id="timer-count" ng-bind="counter | timecode"></h1>
             <div ng-show="!isTimerRunning && !breakTime">
                 <button ng-click="startTimer()">Start</button>
             </div>
@@ -25,16 +28,19 @@
             <div ng-show="breakTime && !isTimerRunning">
                 <button ng-click="startTimer()">Break</button>
             </div>
+            </div>
         </div>
         <div class="task-list col-md-3">
-            <h2>Completed Tasks</h2>
-            <input type="text" ng-model="task">
-            <button ng-click="addTask()">Add Task</button>
+            <div class="task-head">
+                <h2>Completed Tasks</h2>
+                <input type="text" ng-model="task">
+                <button ng-click="addTask()">Add Task</button>
+            </div>
             <div class="tasks">
                 <ul>
                     <li ng-repeat="task in tasks">
-                        {{task.task}}<br>
-                        {{task.completed | date:'medium'}}
+                        <p id="task-item">{{task.task}}</p>
+                        <p id="task-time">{{task.completed | date:'medium'}}</p>
                     </li>
                 </ul>
             </div>

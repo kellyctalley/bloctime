@@ -1,37 +1,102 @@
-.container {
-  width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .timer {
   text-align: center;
+  height: 900px;
 
-  h1 {
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 900;
-    font-size: 3em;
+  background: #e00404; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #e00404 0%, #8f0222 50%, #6d0019 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#e00404), color-stop(50%,#8f0222), color-stop(100%,#6d0019)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #e00404 0%,#8f0222 50%,#6d0019 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #e00404 0%,#8f0222 50%,#6d0019 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #e00404 0%,#8f0222 50%,#6d0019 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center, #e00404 0%,#8f0222 50%,#6d0019 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e00404', endColorstr='#6d0019',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  #timer-title {
+    font-family: 'Biryani', sans-serif;
+    font-weight: 300;
+    color: #fff;
+  }
+
+  #timer-count {
+    font-family: 'Exo', sans-serif;
+    font-weight: 300;
+    color: #fff;
+    font-size: 8em;
+    padding-top: 140px;
   }
 
   button {
     font-size: 1.5em;
-    padding: 10px;
+    font-family: 'Exo', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 10px 15px;
     color: #fff;
-    background-color: red;
-    border: 0;
+    background-color: transparent;
+    border: 1.5px solid #fff;
     outline: 0;
   }
 }
 
+.timer-circle {
+  height: 500px;
+  width: 500px;
+  margin: 25px auto;
+  border: 20px solid #fff;
+  border-radius: 100%;
+}
+
+
 .task-list {
-  height: 1000px;
-  background-color: #ddd;
+  height: 900px;
+  background-color: #555;
+  font-family: 'Biryani', sans-serif;
+  color: #fff;
+
+  &.col-md-3 {
+    padding: 0;
+  }
+
+  .task-head {
+    padding: 0 0 15px 15px;
+  }
+
+  button {
+    font-size: 1em;
+    font-family: 'Biryani', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    color: #fff;
+    background-color: transparent;
+    border: 1.5px solid #fff;
+    outline: 0;
+  }
 
   li {
-    background-color: #fff;
-    padding: 10px;
-    text-align: center;
-    border: 1px #000 solid;
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+    color: #fff;
+
+    &:nth-child(odd){
+      background-color: #b71010;
+    }
+
+    &:nth-child(even){
+      background-color: #ed1a1a;
+    }
+
+    #task-item {
+      font-size: 1.25em;
+      margin: 0;
+    }
+
+    #task-time {
+      font-size: 0.75em;
+      text-transform: uppercase;
+      margin: 0;
+    }
   }
 }
 
