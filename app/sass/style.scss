@@ -61,12 +61,22 @@
     padding: 0 0 15px 15px;
   }
 
+  input {
+    color: #000;
+
+    &:focus {
+      border: 3px solid #aaa;
+      outline: none;
+    }
+  }
+
   button {
     font-size: 1em;
     font-family: 'Biryani', sans-serif;
     font-weight: 300;
     text-transform: uppercase;
     padding: 10px 15px;
+    margin-left: 10px;
     color: #fff;
     background-color: transparent;
     border: 1.5px solid #fff;

@@ -38,7 +38,7 @@
             </div>
             <div class="tasks">
                 <ul>
-                    <li ng-repeat="task in tasks">
+                    <li ng-repeat="task in tasks | orderBy : '-completed'">
                         <p id="task-item">{{task.task}}</p>
                         <p id="task-time">{{task.completed | date:'medium'}}</p>
                     </li>
