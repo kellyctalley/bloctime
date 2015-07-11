@@ -1,16 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 blocTime = angular.module('BlocTime', ['ui.router', 'firebase']);
 
-//create countdown timers
-  //work timer starts at 25 minutes
-  //break timer starts at 5 minutes
-  //filter into timecode format
-
-  //create variables for full time, short break time and long break time
-  //can these be done as variables and then inserted into $scope.counter?
-  //and then keep track of how many sessions have gone by?
-  //possibly add some kind of indicator?
-
 var workTimer = 10; //1500
 var shortBreak = 3; //300
 var longBreak = 5; //1800
@@ -22,6 +12,7 @@ var timerDing = new buzz.sound( "https://dl.dropboxusercontent.com/u/101665267/e
 blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function($scope, $interval, Tasks) {
   $scope.isTimerRunning = false;
   $scope.breakTime = false;
+  $scope.pomoNumber = 1;
   var pomodoros = 0;
   var pomodorGo;
 
@@ -36,6 +27,14 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
 
     $scope.task = null;
 
+  };
+
+  $scope.checkPress = function (event) {
+    //event.which
+  };
+
+  $scope.clearData = function () {
+    Tasks.clearData();
   };
 
   $scope.startTimer = function() {
@@ -67,6 +66,7 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
           }
         } else {
           console.log("back to work");
+          $scope.pomoNumber ++;
           $scope.breakTime = false;
           $scope.counter = workTimer;
         }
@@ -86,6 +86,11 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
       }
     }, 1000);*/
 
+  };
+
+  $scope.pauseTimer = function() {
+    $interval.cancel(pomodorGo);
+    $scope.isTimerRunning = false;
   };
 
   $scope.resetTimer = function() {
@@ -139,14 +144,54 @@ blocTime.factory('Tasks', ['$firebaseArray', function($firebaseArray) {
   // create an AngularFire reference to the data
   var tasks = $firebaseArray(ref);
 
-  return {
-    all: tasks
-    // remaining logic for tasks
-  }
-
-  $scope.clearData = function() {
+  function clearData() {
     ref.remove();
   };
 
+  return {
+    all: tasks,
+    clearData: clearData
+    // remaining logic for tasks
+  };
+
 }]);
+
+
+
+
+//pie timer
+  //draw circle
+  //set circle equal to timer
+  //fill in circle as timer runs
+  //fill pauses when pause button is clicked
+  //fill resets when reset button is clicked
+
+var seconds = 30;
+var doPlay = true;
+var loader = document.getElementById('loader')
+  , α = 0
+  , π = Math.PI
+  , t = (seconds/360 * 1000);
+
+(function draw() {
+  α++;
+  α %= 360;
+  var r = ( α * π / 180 )
+    , x = Math.sin( r ) * 125
+    , y = Math.cos( r ) * - 125
+    , mid = ( α > 180 ) ? 1 : 0
+    , anim = 'M 0 0 v -125 A 125 125 1 ' 
+           + mid + ' 1 ' 
+           +  x  + ' ' 
+           +  y  + ' z';
+  //[x,y].forEach(function( d ){
+  //  d = Math.round( d * 1e3 ) / 1e3;
+  //});
+ 
+  loader.setAttribute( 'd', anim );
+  
+  if(doPlay){
+    setTimeout(draw, t); // Redraw
+  }
+})();
 },{}]},{},[1]);

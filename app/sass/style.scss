@@ -1,6 +1,5 @@
-.timer {
-  text-align: center;
-  height: 900px;
+.timer-container {
+  height: 100vh;
 
   background: #e00404; /* Old browsers */
   background: -moz-radial-gradient(center, ellipse cover, #e00404 0%, #8f0222 50%, #6d0019 100%); /* FF3.6+ */
@@ -11,47 +10,87 @@
   background: radial-gradient(ellipse at center, #e00404 0%,#8f0222 50%,#6d0019 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e00404', endColorstr='#6d0019',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
-  #timer-title {
-    font-family: 'Biryani', sans-serif;
-    font-weight: 300;
-    color: #fff;
+  .timer-circle {
+    width: 675px;
+    height: 675px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: absolute;
+    margin: 0 auto;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background-color: #e00404;
+    border-radius: 50%;
+    border: 1px solid #fff;
+
+    .rotate {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: relative;
+      z-index: 10;
+
+      #loader {
+        fill: #fff;
+      }
+    }
   }
 
-  #timer-count {
-    font-family: 'Exo', sans-serif;
-    font-weight: 300;
-    color: #fff;
-    font-size: 8em;
-    padding-top: 140px;
-  }
+  .inside-circle {
+    background-color: #8f0222;
+    width: 625px;
+    height: 625px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    margin: 0 auto;
+    top: 25px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 11;
 
-  button {
-    font-size: 1.5em;
-    font-family: 'Exo', sans-serif;
-    font-weight: 300;
-    text-transform: uppercase;
-    padding: 10px 15px;
-    color: #fff;
-    background-color: transparent;
-    border: 1.5px solid #fff;
-    outline: 0;
+    .timer-text {
+      position: absolute;
+      margin: 0 auto;
+      top: 150px;
+      left: 0;
+      right: 0;
+    }
+
+    #timer-title {
+      font-family: 'Biryani', sans-serif;
+      font-weight: 300;
+      color: #fff;
+    }
+
+    #timer-count {
+      font-family: 'Exo', sans-serif;
+      font-weight: 300;
+      color: #fff;
+      font-size: 8em;
+    }
+
+    button {
+      font-size: 1.5em;
+      font-family: 'Exo', sans-serif;
+      font-weight: 300;
+      text-transform: uppercase;
+      padding: 10px 15px;
+      color: #fff;
+      background-color: transparent;
+      border: 1.5px solid #fff;
+      outline: 0;
+    }
   }
 }
-
-.timer-circle {
-  height: 500px;
-  width: 500px;
-  margin: 25px auto;
-  border: 20px solid #fff;
-  border-radius: 100%;
-}
-
 
 .task-list {
-  height: 900px;
-  background-color: #555;
+  height: 100vh;
+  background-color: #ddd;
   font-family: 'Biryani', sans-serif;
-  color: #fff;
+  color: #000;
 
   &.col-md-3 {
     padding: 0;
@@ -77,9 +116,9 @@
     text-transform: uppercase;
     padding: 10px 15px;
     margin-left: 10px;
-    color: #fff;
+    color: #555;
     background-color: transparent;
-    border: 1.5px solid #fff;
+    border: 1.5px solid #555;
     outline: 0;
   }
 

@@ -13,27 +13,34 @@
 <body>
     <div class="container-fluid" ng-controller="countdownTimer">
         <div class="row">
-        <!--<img src="/templates/test.jpg">-->
-        <div class="timer col-md-9">
-            <h1 id="timer-title">bloc pomodoro timer</h1>
+        <div class="timer-container col-md-9">
             <div class="timer-circle">
-                <h1 id="timer-count" ng-bind="counter | timecode"></h1>
-            <div ng-show="!isTimerRunning && !breakTime">
-                <button ng-click="startTimer()">Start</button>
-            </div>
-            <div ng-show="isTimerRunning">
-                <!--<button ng-click="pauseTimer()">Pause</button>-->
-                <button ng-click="resetTimer()">Reset</button>
-            </div>
-            <div ng-show="breakTime && !isTimerRunning">
-                <button ng-click="startTimer()">Break</button>
-            </div>
+                
+                <svg class="rotate" viewbox="0 0 250 250">
+                    <path id="loader" transform="translate(125, 125)"/>
+                </svg>
+                <div class="inside-circle">
+                    <div class="timer-text">
+                        <h1 id="timer-title">pomodoro #{{pomoNumber}}</h1>
+                        <h1 id="timer-count" ng-bind="counter | timecode"></h1>
+                        <div ng-show="!isTimerRunning && !breakTime">
+                            <button ng-click="startTimer()">Start</button>
+                        </div>
+                        <div ng-show="isTimerRunning">
+                            <button ng-click="pauseTimer()">Pause</button>
+                            <button ng-click="resetTimer()">Reset</button>
+                        </div>
+                        <div ng-show="breakTime && !isTimerRunning">
+                            <button ng-click="startTimer()">Break</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="task-list col-md-3">
             <div class="task-head">
                 <h2>Completed Tasks</h2>
-                <input type="text" ng-model="task">
+                <input type="text" ng-model="task" ng-keypress="checkPress($event)">
                 <button ng-click="addTask()">Add Task</button>
             </div>
             <div class="tasks">
