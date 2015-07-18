@@ -38,6 +38,8 @@ module.exports = function(grunt) {
             hapi: {
                 files: [
                     './app/scripts/**/*.js',
+                    './app/scripts/**/*.*.*.js',
+                    './app/scripts/**/*.*.js',
                     './app/sass/**/*.scss',
                     './app/pages/**/*.html',
                     './app/templates/**/*.html',
@@ -76,6 +78,12 @@ module.exports = function(grunt) {
                     src: [ './**/*.html' ],
                     dest: './dist/templates',
                     cwd: './app/templates'
+                },
+                {
+                    expand: true,
+                    src: [ './**/*.js' ],
+                    dest: './dist/js',
+                    cwd: './app/scripts/'
                 }]
             }
         },

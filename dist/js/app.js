@@ -1,4 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 blocTime = angular.module('BlocTime', ['ui.router', 'firebase']);
 
 var workTimer = 10; //1500
@@ -11,6 +10,7 @@ var timerDing = new buzz.sound( "https://dl.dropboxusercontent.com/u/101665267/e
 
 blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function($scope, $interval, Tasks) {
   $scope.isTimerRunning = false;
+  $scope.isPaused = false;
   $scope.breakTime = false;
   $scope.pomoNumber = 1;
   var pomodoros = 0;
@@ -44,9 +44,18 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
       $scope.counter = workTimer;
     }
 
+    getSeconds = function () {
+      return $scope.counter;
+    }
+
+  angular.element($('.timer-circle').pietimer({
+      seconds: getSeconds()
+    }
+    ));
+  angular.element($('.timer-circle').pietimer('start'));
+
     pomodorGo = $interval(function() {
       $scope.counter--;
-      console.log("interval");
       if ($scope.counter == 0) {
         $interval.cancel(pomodorGo);
         timerDing.play();
@@ -91,6 +100,7 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
   $scope.pauseTimer = function() {
     $interval.cancel(pomodorGo);
     $scope.isTimerRunning = false;
+    $scope.isPaused = true;
   };
 
   $scope.resetTimer = function() {
@@ -98,6 +108,7 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
     $scope.counter = workTimer;
     $scope.isTimerRunning = false;
   };
+
 
   /*$scope.$watch('counter', function() {
     console.log("watch");
@@ -157,41 +168,20 @@ blocTime.factory('Tasks', ['$firebaseArray', function($firebaseArray) {
 }]);
 
 
+/*blocTime.directive('pie', function() {
+  return {
+    restrict: 'E',
+    link: 
+      function (scope, element, attributes) {
+        function getSeconds(){
+          return counter;
+        }
+        element.pietimer({
+          seconds: getSeconds(),
+          color: '#fff',
+        });
+        element.pietimer('start');
+    }
+  };
+});*/
 
-
-//pie timer
-  //draw circle
-  //set circle equal to timer
-  //fill in circle as timer runs
-  //fill pauses when pause button is clicked
-  //fill resets when reset button is clicked
-
-var seconds = 30;
-var doPlay = true;
-var loader = document.getElementById('loader')
-  , α = 0
-  , π = Math.PI
-  , t = (seconds/360 * 1000);
-
-(function draw() {
-  α++;
-  α %= 360;
-  var r = ( α * π / 180 )
-    , x = Math.sin( r ) * 125
-    , y = Math.cos( r ) * - 125
-    , mid = ( α > 180 ) ? 1 : 0
-    , anim = 'M 0 0 v -125 A 125 125 1 ' 
-           + mid + ' 1 ' 
-           +  x  + ' ' 
-           +  y  + ' z';
-  //[x,y].forEach(function( d ){
-  //  d = Math.round( d * 1e3 ) / 1e3;
-  //});
- 
-  loader.setAttribute( 'd', anim );
-  
-  if(doPlay){
-    setTimeout(draw, t); // Redraw
-  }
-})();
-},{}]},{},[1]);

@@ -14,17 +14,13 @@
     <div class="container-fluid" ng-controller="countdownTimer">
         <div class="row">
         <div class="timer-container col-md-9">
-            <div class="timer-circle">
-                
-                <svg class="rotate" viewbox="0 0 250 250">
-                    <path id="loader" transform="translate(125, 125)"/>
-                </svg>
+            <div class="timer-circle"></div>
                 <div class="inside-circle">
                     <div class="timer-text">
                         <h1 id="timer-title">pomodoro #{{pomoNumber}}</h1>
                         <h1 id="timer-count" ng-bind="counter | timecode"></h1>
                         <div ng-show="!isTimerRunning && !breakTime">
-                            <button ng-click="startTimer()">Start</button>
+                            <button ng-click="startTimer(); pleaseStart()">Start</button>
                         </div>
                         <div ng-show="isTimerRunning">
                             <button ng-click="pauseTimer()">Pause</button>
@@ -35,7 +31,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <div class="task-list col-md-3">
             <div class="task-head">
@@ -56,7 +51,9 @@
         </div>
     </div>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/js/jquery.pietimer.min.js"></script>
+    <script src="/js/jquery.pietimer.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
