@@ -1,8 +1,8 @@
 blocTime = angular.module('BlocTime', ['ui.router', 'firebase']);
 
-var workTimer = 10; //1500
-var shortBreak = 3; //300
-var longBreak = 5; //1800
+var workTimer = 1500; //1500
+var shortBreak = 300; //300
+var longBreak = 1000; //1800
 
 var timerDing = new buzz.sound( "https://dl.dropboxusercontent.com/u/101665267/elevator-ding.mp3", {
   preload: true
@@ -10,11 +10,15 @@ var timerDing = new buzz.sound( "https://dl.dropboxusercontent.com/u/101665267/e
 
 blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function($scope, $interval, Tasks) {
   $scope.isTimerRunning = false;
-  $scope.isPaused = false;
   $scope.breakTime = false;
   $scope.pomoNumber = 1;
   var pomodoros = 0;
   var pomodorGo;
+
+  angular.element($('.timer-circle').pietimer({
+    seconds: workTimer
+  }
+  ));
 
   // might need to tweak this
   $scope.tasks = Tasks.all;
@@ -26,12 +30,8 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
     });
 
     $scope.task = null;
-
   };
 
-  $scope.checkPress = function (event) {
-    //event.which
-  };
 
   $scope.clearData = function () {
     Tasks.clearData();
@@ -44,14 +44,6 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
       $scope.counter = workTimer;
     }
 
-    getSeconds = function () {
-      return $scope.counter;
-    }
-
-  angular.element($('.timer-circle').pietimer({
-      seconds: getSeconds()
-    }
-    ));
   angular.element($('.timer-circle').pietimer('start'));
 
     pomodorGo = $interval(function() {
@@ -69,15 +61,24 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
           if (pomodoros % 4 === 0) {
             $scope.counter = longBreak;
             $scope.isTimerRunning = false;
+              angular.element($('.timer-circle').pietimer({
+                seconds: longBreak
+              }));
           } else {
             $scope.counter = shortBreak;
             $scope.isTimerRunning = false;
+              angular.element($('.timer-circle').pietimer({
+                seconds: shortBreak
+              }));
           }
         } else {
           console.log("back to work");
           $scope.pomoNumber ++;
           $scope.breakTime = false;
           $scope.counter = workTimer;
+              angular.element($('.timer-circle').pietimer({
+                seconds: workTimer
+              }));
         }
 
       }
@@ -101,12 +102,16 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
     $interval.cancel(pomodorGo);
     $scope.isTimerRunning = false;
     $scope.isPaused = true;
+    angular.element($('.timer-circle').pietimer('pause'));
   };
 
   $scope.resetTimer = function() {
     $interval.cancel(pomodorGo);
     $scope.counter = workTimer;
     $scope.isTimerRunning = false;
+      angular.element($('.timer-circle').pietimer({
+        seconds: $scope.counter
+      }));
   };
 
 
@@ -167,21 +172,8 @@ blocTime.factory('Tasks', ['$firebaseArray', function($firebaseArray) {
 
 }]);
 
-
-/*blocTime.directive('pie', function() {
-  return {
-    restrict: 'E',
-    link: 
-      function (scope, element, attributes) {
-        function getSeconds(){
-          return counter;
-        }
-        element.pietimer({
-          seconds: getSeconds(),
-          color: '#fff',
-        });
-        element.pietimer('start');
-    }
-  };
-});*/
-
+//add task in box
+//when complete, check complete box
+//record pomoNumber upon click
+//add tomatoes
+//reset pomoNumber

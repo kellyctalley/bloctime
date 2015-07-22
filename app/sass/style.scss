@@ -1,5 +1,5 @@
-.timer-container {
-  height: 100vh;
+body {
+    height: 100vh;
 
   background: #e00404; /* Old browsers */
   background: -moz-radial-gradient(center, ellipse cover, #e00404 0%, #8f0222 50%, #6d0019 100%); /* FF3.6+ */
@@ -9,6 +9,9 @@
   background: -ms-radial-gradient(center, ellipse cover, #e00404 0%,#8f0222 50%,#6d0019 100%); /* IE10+ */
   background: radial-gradient(ellipse at center, #e00404 0%,#8f0222 50%,#6d0019 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e00404', endColorstr='#6d0019',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.timer-container {
 
   .timer-circle {
     width: 675px;
@@ -74,9 +77,11 @@
 
 .task-list {
   height: 100vh;
-  background-color: #ddd;
+  background-color: rgba(0,0,0,0.5);
+  border-left: 1px solid #fff;
   font-family: 'Biryani', sans-serif;
-  color: #000;
+  color: #fff;
+  text-align: center;
 
   &.col-md-3 {
     padding: 0;
@@ -88,6 +93,7 @@
 
   input {
     color: #000;
+    width: 75%;
 
     &:focus {
       border: 3px solid #aaa;
@@ -101,11 +107,18 @@
     font-weight: 300;
     text-transform: uppercase;
     padding: 10px 15px;
-    margin-left: 10px;
-    color: #555;
+    color: #fff;
     background-color: transparent;
-    border: 1.5px solid #555;
+    border: 1.5px solid #fff;
     outline: 0;
+  }
+
+  #clear-button {
+    margin-left: 15px;
+  }
+
+  #add-button {
+    margin-top: 10px;
   }
 
   li {
@@ -113,14 +126,15 @@
     text-align: left;
     width: 100%;
     color: #fff;
+    border-bottom: 1px solid #fff;
 
-    &:nth-child(odd){
+    /*&:nth-child(odd){
       background-color: #b71010;
     }
 
     &:nth-child(even){
       background-color: #ed1a1a;
-    }
+    }*/
 
     #task-item {
       font-size: 1.25em;

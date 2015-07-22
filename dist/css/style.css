@@ -1,4 +1,4 @@
-.timer-container {
+body {
   height: 100vh;
   background: #e00404;
   /* Old browsers */
@@ -11,67 +11,71 @@
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e00404', endColorstr='#6d0019',GradientType=1 );
   /* IE6-9 fallback on horizontal gradient */ }
-  .timer-container .timer-circle {
-    width: 675px;
-    height: 675px;
+
+.timer-container .timer-circle {
+  width: 675px;
+  height: 675px;
+  position: absolute;
+  margin: 0 auto;
+  top: 25px;
+  left: 0;
+  right: 0;
+  background-color: #e00404;
+  border-radius: 50%;
+  border: 1px solid #fff; }
+.timer-container .inside-circle {
+  background-color: #8f0222;
+  width: 625px;
+  height: 625px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  margin: 0 auto;
+  top: 50px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 11; }
+  .timer-container .inside-circle .timer-text {
     position: absolute;
     margin: 0 auto;
-    top: 25px;
+    top: 150px;
     left: 0;
-    right: 0;
-    background-color: #e00404;
-    border-radius: 50%;
-    border: 1px solid #fff; }
-  .timer-container .inside-circle {
-    background-color: #8f0222;
-    width: 625px;
-    height: 625px;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    position: absolute;
-    margin: 0 auto;
-    top: 50px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 11; }
-    .timer-container .inside-circle .timer-text {
-      position: absolute;
-      margin: 0 auto;
-      top: 150px;
-      left: 0;
-      right: 0; }
-    .timer-container .inside-circle #timer-title {
-      font-family: 'Biryani', sans-serif;
-      font-weight: 300;
-      color: #fff; }
-    .timer-container .inside-circle #timer-count {
-      font-family: 'Exo', sans-serif;
-      font-weight: 300;
-      color: #fff;
-      font-size: 8em; }
-    .timer-container .inside-circle button {
-      font-size: 1.5em;
-      font-family: 'Exo', sans-serif;
-      font-weight: 300;
-      text-transform: uppercase;
-      padding: 10px 15px;
-      color: #fff;
-      background-color: transparent;
-      border: 1.5px solid #fff;
-      outline: 0; }
+    right: 0; }
+  .timer-container .inside-circle #timer-title {
+    font-family: 'Biryani', sans-serif;
+    font-weight: 300;
+    color: #fff; }
+  .timer-container .inside-circle #timer-count {
+    font-family: 'Exo', sans-serif;
+    font-weight: 300;
+    color: #fff;
+    font-size: 8em; }
+  .timer-container .inside-circle button {
+    font-size: 1.5em;
+    font-family: 'Exo', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    color: #fff;
+    background-color: transparent;
+    border: 1.5px solid #fff;
+    outline: 0; }
 
 .task-list {
   height: 100vh;
-  background-color: #ddd;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-left: 1px solid #fff;
   font-family: 'Biryani', sans-serif;
-  color: #000; }
+  color: #fff;
+  text-align: center; }
   .task-list.col-md-3 {
     padding: 0; }
   .task-list .task-head {
     padding: 0 0 15px 15px; }
   .task-list input {
-    color: #000; }
+    color: #000;
+    width: 75%; }
     .task-list input:focus {
       border: 3px solid #aaa;
       outline: none; }
@@ -81,20 +85,27 @@
     font-weight: 300;
     text-transform: uppercase;
     padding: 10px 15px;
-    margin-left: 10px;
-    color: #555;
+    color: #fff;
     background-color: transparent;
-    border: 1.5px solid #555;
+    border: 1.5px solid #fff;
     outline: 0; }
+  .task-list #clear-button {
+    margin-left: 15px; }
+  .task-list #add-button {
+    margin-top: 10px; }
   .task-list li {
     padding: 20px;
     text-align: left;
     width: 100%;
-    color: #fff; }
-    .task-list li:nth-child(odd) {
-      background-color: #b71010; }
-    .task-list li:nth-child(even) {
-      background-color: #ed1a1a; }
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    /*&:nth-child(odd){
+      background-color: #b71010;
+    }
+
+    &:nth-child(even){
+      background-color: #ed1a1a;
+    }*/ }
     .task-list li #task-item {
       font-size: 1.25em;
       margin: 0; }

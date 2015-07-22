@@ -36,7 +36,8 @@
             <div class="task-head">
                 <h2>Completed Tasks</h2>
                 <input type="text" ng-model="task" ng-keypress="checkPress($event)">
-                <button ng-click="addTask()">Add Task</button>
+                <br>
+                <button id="add-button" ng-click="addTask()">Add Task</button>
             </div>
             <div class="tasks">
                 <ul>
@@ -46,7 +47,7 @@
                     </li>
                 </ul>
             </div>
-            <button ng-click="clearData()">Clear List</button>
+            <button id="clear-button" ng-click="clearData()">Clear List</button>
         </div>
         </div>
     </div>
