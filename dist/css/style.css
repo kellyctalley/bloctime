@@ -93,12 +93,13 @@ body {
     margin-left: 15px; }
   .task-list #add-button {
     margin-top: 10px; }
+  .task-list ul {
+    border-bottom: 1px solid #fff;
+    padding: 20px; }
   .task-list li {
-    padding: 20px;
     text-align: left;
     width: 100%;
     color: #fff;
-    border-bottom: 1px solid #fff;
     /*&:nth-child(odd){
       background-color: #b71010;
     }
@@ -109,7 +110,7 @@ body {
     .task-list li #task-item {
       font-size: 1.25em;
       margin: 0; }
-    .task-list li #task-time {
+    .task-list li .task-small {
       font-size: 0.75em;
       text-transform: uppercase;
       margin: 0; }

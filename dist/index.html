@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Bloc Time</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.1/build/cssreset/cssreset-min.css">
-    <link href='http://fonts.googleapis.com/css?family=Biryani:300,400,700,900' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Exo:300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Biryani:300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Exo:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -40,10 +40,16 @@
                 <button id="add-button" ng-click="addTask()">Add Task</button>
             </div>
             <div class="tasks">
-                <ul>
-                    <li ng-repeat="task in tasks | orderBy : '-completed'">
+                <ul ng-repeat="task in tasks | orderBy : '-completed'">
+                    <li>
                         <p id="task-item">{{task.task}}</p>
-                        <p id="task-time">{{task.completed | date:'medium'}}</p>
+                        <p class="task-small">{{task.completed | date:'medium'}}</p>
+                    </li>
+                    <li>
+                        <label for="text" class="task-small">Completed?</label>
+                        <input type="checkbox" id="checkbox" ng-click="tomatoCount()">
+                        <p id="number">pomodoros to complete: {{task.tomatoes}}</p>
+                        <!--<img ng-repeat="tomato in tomatoes(pomoNumber) track by $index" id="tomato" src="/images/tomato.png" height="25px">-->
                     </li>
                 </ul>
             </div>

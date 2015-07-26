@@ -1,8 +1,8 @@
 blocTime = angular.module('BlocTime', ['ui.router', 'firebase']);
 
-var workTimer = 1500; //1500
-var shortBreak = 300; //300
-var longBreak = 1000; //1800
+var workTimer = 10; //1500
+var shortBreak = 3; //300
+var longBreak = 10; //1800
 
 var timerDing = new buzz.sound( "https://dl.dropboxusercontent.com/u/101665267/elevator-ding.mp3", {
   preload: true
@@ -12,6 +12,7 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
   $scope.isTimerRunning = false;
   $scope.breakTime = false;
   $scope.pomoNumber = 1;
+  $scope.isChecked = false;
   var pomodoros = 0;
   var pomodorGo;
 
@@ -26,7 +27,8 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
   $scope.addTask = function () {
     Tasks.all.$add({
       task: $scope.task,
-      completed: Date.now()
+      completed: Date.now(),
+      tomatoes: $scope.pomoNumber
     });
 
     $scope.task = null;
@@ -112,6 +114,18 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
       angular.element($('.timer-circle').pietimer({
         seconds: $scope.counter
       }));
+  };
+
+  $scope.tomatoCount = function() {
+    console.log($scope.pomoNumber);
+    
+    $scope.tomatoes = function(num) {
+        return new Array(num);   
+    }
+
+    $scope.isChecked = true;
+
+    $scope.pomoNumber = 1;
   };
 
 
