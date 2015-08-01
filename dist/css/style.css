@@ -1,5 +1,5 @@
 body {
-  height: 100vh;
+  height: 120vh;
   background: #e00404;
   /* Old browsers */
   /* FF3.6+ */
@@ -63,7 +63,7 @@ body {
     outline: 0; }
 
 .task-list {
-  height: 100vh;
+  height: 120vh;
   background-color: rgba(0, 0, 0, 0.5);
   border-left: 1px solid #fff;
   font-family: 'Biryani', sans-serif;
@@ -114,3 +114,5 @@ body {
       font-size: 0.75em;
       text-transform: uppercase;
       margin: 0; }
+    .task-list li #tomato-line {
+      margin-top: 5px; }

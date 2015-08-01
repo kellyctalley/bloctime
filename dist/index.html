@@ -17,10 +17,11 @@
             <div class="timer-circle"></div>
                 <div class="inside-circle">
                     <div class="timer-text">
-                        <h1 id="timer-title">pomodoro #{{pomoNumber}}</h1>
+                        <h1 id="timer-title" ng-show="!breakTime">pomodoro #{{pomoNumber}}</h1>
+                        <h1 id="timer-title" ng-show="breakTime">take a break!</h1>
                         <h1 id="timer-count" ng-bind="counter | timecode"></h1>
                         <div ng-show="!isTimerRunning && !breakTime">
-                            <button ng-click="startTimer(); pleaseStart()">Start</button>
+                            <button ng-click="startTimer()">Start</button>
                         </div>
                         <div ng-show="isTimerRunning">
                             <button ng-click="pauseTimer()">Pause</button>
@@ -34,10 +35,10 @@
         </div>
         <div class="task-list col-md-3">
             <div class="task-head">
-                <h2>Completed Tasks</h2>
+                <h2>add your task!</h2>
                 <input type="text" ng-model="task" ng-keypress="checkPress($event)">
                 <br>
-                <button id="add-button" ng-click="addTask()">Add Task</button>
+                <button id="add-button" ng-click="addTask()" ng-show="breakTime">Complete Task</button>
             </div>
             <div class="tasks">
                 <ul ng-repeat="task in tasks | orderBy : '-completed'">
@@ -46,10 +47,9 @@
                         <p class="task-small">{{task.completed | date:'medium'}}</p>
                     </li>
                     <li>
-                        <label for="text" class="task-small">Completed?</label>
-                        <input type="checkbox" id="checkbox" ng-click="tomatoCount()">
-                        <p id="number">pomodoros to complete: {{task.tomatoes}}</p>
-                        <!--<img ng-repeat="tomato in tomatoes(pomoNumber) track by $index" id="tomato" src="/images/tomato.png" height="25px">-->
+                        <!--<label for="text" class="task-small">Completed?</label>
+                        <input type="checkbox" id="checkbox" ng-click="markTaskComplete(task)">-->
+                        <div id="tomato-line"><img ng-repeat="tomato in tomatoes(task) track by $index" id="tomato" src="/images/tomato.png" height="25px"></div>
                     </li>
                 </ul>
             </div>

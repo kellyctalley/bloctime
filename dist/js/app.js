@@ -14,6 +14,7 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
   $scope.pomoNumber = 1;
   $scope.isChecked = false;
   var pomodoros = 0;
+  var completePomodoros = 0;
   var pomodorGo;
 
   angular.element($('.timer-circle').pietimer({
@@ -28,10 +29,13 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
     Tasks.all.$add({
       task: $scope.task,
       completed: Date.now(),
-      tomatoes: $scope.pomoNumber
+      pomonum: completePomodoros,
+      complete: false
     });
 
     $scope.task = null;
+
+    completePomodoros = 0;
   };
 
 
@@ -57,7 +61,8 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
 
         if (!$scope.breakTime) {
           pomodoros++;
-          console.log(pomodoros);
+          completePomodoros++;
+          console.log(completePomodoros);
           $scope.breakTime = true;
 
           if (pomodoros % 4 === 0) {
@@ -116,18 +121,26 @@ blocTime.controller("countdownTimer", ['$scope', '$interval', 'Tasks', function(
       }));
   };
 
-  $scope.tomatoCount = function() {
-    console.log($scope.pomoNumber);
-    
-    $scope.tomatoes = function(num) {
-        return new Array(num);   
-    }
-
-    $scope.isChecked = true;
-
-    $scope.pomoNumber = 1;
+  $scope.tomatoes = function(task) {
+    return new Array(task.pomonum);   
   };
 
+  $scope.markTaskComplete = function (task) {
+    task.pomonum = $scope.pomoNumber;
+    task.complete = true;
+    Tasks.all.$save(task).then(function () {
+      $scope.pomoNumber = 1;
+    });
+  };
+
+/*
+  $scope.tomatoCount = function() {
+    console.log($scope.pomoNumber);
+
+    $scope.isChecked = true;
+    $scope.pomoNumber = 1;
+  };
+*/
 
   /*$scope.$watch('counter', function() {
     console.log("watch");
