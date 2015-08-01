@@ -1,8 +1,8 @@
 blocTime = angular.module('BlocTime', ['ui.router', 'firebase']);
 
-var workTimer = 10; //1500
-var shortBreak = 3; //300
-var longBreak = 10; //1800
+var workTimer = 1500; //1500
+var shortBreak = 300; //300
+var longBreak = 900; //900
 
 var timerDing = new buzz.sound( "https://dl.dropboxusercontent.com/u/101665267/elevator-ding.mp3", {
   preload: true
